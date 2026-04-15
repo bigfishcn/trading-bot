@@ -1,0 +1,32 @@
+name: Trading Strategy CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:   # 允许手动触发
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pytest vectorbt pandas numpy ccxt
+
+      - name: Run basic validation (placeholder)
+        run: |
+          echo "Running strategy validation..."
+          # 这里后续可以调用真正的回测脚本，比如：
+          # python scripts/validate_strategy.py
+          # 目前只是一个占位符，始终通过
+          echo "Validation passed (placeholder)"
